@@ -24,11 +24,17 @@ public class Play : MonoBehaviour
     public bool readyPlayer = false;
 
     //Campos serializados para inicializar el objeto ENEMY
-    public string nameEnemy = "Player con Herencia";
+    public string nameEnemy = "Enemigo";
     public int healthEnemy = 20;
     public int speedEnemy = 10;
     public int levelEnemy = 1;
     public int bulletsEnemy = 5;
+
+    //Configuración para un enemigo genérico
+    public string nameEnemyG = "Enemigo";
+    public int healthEnemyG = 10;
+    public int speedEnemyG =5;
+    public int levelEnemyG = 1;
    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -61,6 +67,9 @@ public class Play : MonoBehaviour
         player.ShowMessage();
 
         enemy = new Enemy(nameEnemy, healthEnemy, speedEnemy, levelEnemy);
+
+        //Añadimos el enemigo a la lista para que no se produzca un error posteriormente
+        Statistics.enemies.Add(enemy);
         Debug.Log("SHOW MESSAGE DEL ENEMIGO ES EL DE LA CLASE BASE");
         enemy.ShowMessage();
 
@@ -97,6 +106,20 @@ public class Play : MonoBehaviour
         {
             personaje.Level += 100;//Hace uso del setter
             Debug.Log("Nivel incrementado: " + personaje.Level);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //Si el número de enemigos creados hasta el momento no alcanza el número máximo de enemigos
+            if (Enemy.nEnemies <= Statistics.MaxEnemies)
+            {
+                Statistics.enemies.Add(new Enemy("Enemigo" + Enemy.nEnemies, healthEnemyG, speedEnemyG, levelEnemyG));
+                Debug.Log(Statistics.enemies[Enemy.nEnemies - 1].NamePlayer);
+            }
+            else
+            {
+                Debug.Log("No se pueden crear más enemigos");
+            }
         }
 
 
