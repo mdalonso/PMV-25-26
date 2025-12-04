@@ -122,6 +122,16 @@ public class Play : MonoBehaviour
             }
         }
 
+         if (Input.GetKeyDown(KeyCode.M))
+         {
+             player.Attack();//--> Lógica de ataque de Player
+         }
+         if (Input.GetKeyDown(KeyCode.N))
+         {
+             enemy.Attack();//--> Lógica de ataque de Enemigo
+         }
+
 
     }
 }
+
