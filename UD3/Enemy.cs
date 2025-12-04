@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy:Character
+public class Enemy:Character,IAttack
 {
     //Campo público declarado mediante una propiedad autoimplementada
     //Es específico de la clase Enemy, añadiendo componentes con respecto a su clase base.
@@ -25,4 +25,10 @@ public class Enemy:Character
         if (BulletCount <= 0) Debug.Log("Sin munición");
         
     }
+    
+    public void Attack()
+    {
+        Debug.Log("Lógica de ataque del enemigo");
+    }
 }
+
