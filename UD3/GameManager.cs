@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Instancia ˙nica del Singleton.
-    // Esta variable est·tica es de tipo GameManager.
-    //Es una propiedad p˙blica que crear· autom·ticamente un campo private asociado.
+    // Instancia √∫nica del Singleton.
+    // Esta variable est√°tica es de tipo GameManager.
+    //Es una propiedad p√∫blica que crear√° autom√°ticamente un campo private asociado.
     //Ese campo private debe contener un objeto que tiene asociado el script GameManager
     public static GameManager Instance { get; private set; }
 
     // Variable para almacenar un contador global
-    //AquÌ se deberÌan incluir todas las variables y estructuras de informaciÛn que son
-    //globales al juego (Ejemlos: puntuaciÛn acumulada, configuraciÛn de controles...)
-    private int _globalCounter = 0;
+    //Aqu√≠ se deber√≠an incluir todas las variables y estructuras de informaci√≥n que son
+    //globales al juego (Ejemlos: puntuaci√≥n acumulada, configuraci√≥n de controles...)
+    private int _globalCounter = 0;//ESte campo contar√° el n√∫mero de enemigos que hay en el juego
     public int GlobalCounter
     {
         get => _globalCounter;
@@ -25,25 +25,26 @@ public class GameManager : MonoBehaviour
         //Si instance != this es porque hay otra instancia de la clase GameManager.
         if (Instance != null && Instance != this)
         {
-            //en el caso de que ya exista una instancia, el GameObject se destruye y terminamos la ejecuciÛn de Awake.
-            //this.gameObject es el GameObject al que est· asociado el script en ejecuciÛn.
+            //en el caso de que ya exista una instancia, el GameObject se destruye y terminamos la ejecuci√≥n de Awake.
+            //this.gameObject es el GameObject al que est√° asociado el script en ejecuci√≥n.
             Destroy(gameObject);
             return;
         }
 
         // Asignar esta instancia y asegurarse de que no se destruya al cambiar de escena
-        //Si no existe una instancia previa, la instancia ser· this, es decir, la instancia ejecut·ndose actualmente.
+        //Si no existe una instancia previa, la instancia ser√° this, es decir, la instancia ejecut√°ndose actualmente.
         Instance = this;
-        //El mÈtodo DontDestroyOnLoad evita que el gameobject se destruya al cambiar de escena,
+        //El m√©todo DontDestroyOnLoad evita que el gameobject se destruya al cambiar de escena,
         //que es el comportamiento habitual en Unity
         //Esto crea un nuevo grupo de objetos en la escena que permite desvincular el GameManager de la escena que se muestra
         DontDestroyOnLoad(gameObject);
     }
 
-    // MÈtodo para incrementar el contador
+    // M√©todo para incrementar el contador
     public void IncrementCounter()
     {
         _globalCounter++;
         Debug.Log("Contador global: " + _globalCounter);
     }
 }
+
