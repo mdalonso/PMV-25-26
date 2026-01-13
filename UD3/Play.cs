@@ -115,6 +115,10 @@ public class Play : MonoBehaviour
             {
                 Statistics.enemies.Add(new Enemy("Enemigo" + Enemy.nEnemies, healthEnemyG, speedEnemyG, levelEnemyG));
                 Debug.Log(Statistics.enemies[Enemy.nEnemies - 1].NamePlayer);
+
+                 //Probamos el acceso a una variable global den GameManager
+                GameManager.Instance.GlobalCounter++;
+                Debug.Log("Contador en el Gamemanager: "+GameManager.Instance.GlobalCounter);
             }
             else
             {
@@ -134,4 +138,5 @@ public class Play : MonoBehaviour
 
     }
 }
+
 
