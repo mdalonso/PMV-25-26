@@ -14,10 +14,11 @@ public class GatherInput : MonoBehaviour
     private bool _secondaryPressed;
     private Vector2 _scrollValue;
 
-    //Necesitamos acceder publicamente al vector de movimiento
+    //Necesitamos acceder publicamente al los campos privados
     public Vector2 Movimiento { get => _movimiento;}
-    
-    
+    public Vector2 MousePosition { get => _mousePosition;}
+    public bool PrimaryPressed { get => _primaryPressed;}
+
     private void Awake()
     {
         //Inicialización del objeto InputManager
@@ -27,11 +28,14 @@ public class GatherInput : MonoBehaviour
     private void OnEnable()
     {
         //Al activar el objeto debemos suscribir los métodos creados para gestionar el movimiento
+        //Lectura de la entrada de teclado.
         inputActions.Player.Move.performed += StartMove;//Método que inicia el movimiento
         inputActions.Player.Move.canceled += EndMove;//Método que termina el movimiento (Acción cancelada) para que deje de moverse al soltar la tecla
 
+        //Lectura de la entrada del ratón
         inputActions.Player.MousePosition.performed += OnMouseMove;
         inputActions.Player.PrimaryClick.performed += OnPrymaryPress;
+        inputActions.Player.PrimaryClick.canceled += OnPrimaryFree;
         inputActions.Player.SecondaryClick.performed += OnSecondaryPress;
         inputActions.Player.Scroll.performed += OnScroll;
 
@@ -47,7 +51,10 @@ public class GatherInput : MonoBehaviour
         inputActions.Player.Move.canceled -= EndMove;
 
         inputActions.Player.MousePosition.performed -= OnMouseMove;
+        inputActions.Player.PrimaryClick.performed -= OnPrymaryPress;
+        inputActions.Player.PrimaryClick.canceled -= OnPrimaryFree;
         inputActions.Player.Scroll.performed -= OnScroll;
+        
 
 
         inputActions.Player.Disable();//Deshabilitamos el Action Map
@@ -68,13 +75,17 @@ public class GatherInput : MonoBehaviour
     private void OnMouseMove(InputAction.CallbackContext context)
     {
         _mousePosition = context.ReadValue<Vector2>();
-        Debug.Log($"Mouse Position (screen): {_mousePosition}");
+       // Debug.Log($"Mouse Position (screen): {_mousePosition}");
     }
 
     private void OnPrymaryPress(InputAction.CallbackContext context)
     {
         _primaryPressed = true;
         Debug.Log("Se ha pulsado el botón izquierdo del ratón");
+    }
+    private void OnPrimaryFree(InputAction.CallbackContext context)
+    {
+        _primaryPressed = false;
     }
 
     private void OnSecondaryPress(InputAction.CallbackContext context)
