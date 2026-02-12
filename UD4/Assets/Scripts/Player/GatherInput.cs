@@ -35,7 +35,6 @@ public class GatherInput : MonoBehaviour
         //Lectura de la entrada del ratón
         inputActions.Player.MousePosition.performed += OnMouseMove;
         inputActions.Player.PrimaryClick.performed += OnPrymaryPress;
-        inputActions.Player.PrimaryClick.canceled += OnPrimaryFree;
         inputActions.Player.SecondaryClick.performed += OnSecondaryPress;
         inputActions.Player.Scroll.performed += OnScroll;
 
@@ -52,7 +51,6 @@ public class GatherInput : MonoBehaviour
 
         inputActions.Player.MousePosition.performed -= OnMouseMove;
         inputActions.Player.PrimaryClick.performed -= OnPrymaryPress;
-        inputActions.Player.PrimaryClick.canceled -= OnPrimaryFree;
         inputActions.Player.Scroll.performed -= OnScroll;
         
 
@@ -75,7 +73,6 @@ public class GatherInput : MonoBehaviour
     private void OnMouseMove(InputAction.CallbackContext context)
     {
         _mousePosition = context.ReadValue<Vector2>();
-       // Debug.Log($"Mouse Position (screen): {_mousePosition}");
     }
 
     private void OnPrymaryPress(InputAction.CallbackContext context)
@@ -83,10 +80,7 @@ public class GatherInput : MonoBehaviour
         _primaryPressed = true;
         Debug.Log("Se ha pulsado el botón izquierdo del ratón");
     }
-    private void OnPrimaryFree(InputAction.CallbackContext context)
-    {
-        _primaryPressed = false;
-    }
+    
 
     private void OnSecondaryPress(InputAction.CallbackContext context)
     {
