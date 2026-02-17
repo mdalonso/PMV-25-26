@@ -78,7 +78,7 @@ public class GatherInput : MonoBehaviour
     private void OnPrymaryPress(InputAction.CallbackContext context)
     {
         _primaryPressed = true;
-        Debug.Log("Se ha pulsado el botón izquierdo del ratón");
+       // Debug.Log("Se ha pulsado el botón izquierdo del ratón");
     }
     
 
