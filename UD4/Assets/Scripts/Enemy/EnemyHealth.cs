@@ -11,19 +11,17 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage()
     {
-
         _health--;
-      
-        //if (_health <= 0)
-        //{
-        //    Die();
-        //}
+
+        if (_health <= 0)
+        {
+            Die();
+        }
     }
 
     void Die()
     {
         Debug.Log("Enemigo destruido");
-
         Destroy(gameObject);
     }
 }
