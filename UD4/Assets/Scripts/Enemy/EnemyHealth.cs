@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -7,8 +5,12 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField, Tooltip("Vida del enemigo")] int _health = 1; //vida
 
+    public int Health { get => _health; set => _health = value; }
 
-
+    private void OnEnable()
+    {
+        _health = 1;
+    }
     public void TakeDamage()
     {
         _health--;
@@ -22,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemigo destruido");
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        
+        PoolManager.Instance.ReturnToPool(gameObject.GetComponent<ObjectPoolBehaviour>());
     }
 }

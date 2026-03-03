@@ -21,11 +21,26 @@ public class EnemyCollisions : MonoBehaviour
         //Para ello ha sido necesario asignar el Tag Bullet al prefab Bullet.
         if (collision.CompareTag("Bullet"))
         {
+            //Necesitamos una referencia a Bullet.cs para comprobar si se trata de un powerShot y actuar en consecuencia
+            Bullet bullet=collision.GetComponent<Bullet>();
+
             //Si la colisión se produce con un proyectil, llamamos al método TakeDamage para restarle vida
             _enemyHealth.TakeDamage();
+
+            if (!bullet.PowerShot)
+            {
+                //Destruimos el proyectil
+                //Destroy(collision.gameObject);//Si no estamos usando un pool
+
+                //Devolvemos el proyectil al pool
+                PoolManager.Instance.ReturnToPool(collision.gameObject.GetComponent<ObjectPoolBehaviour>());
+            }
+            else
+            {
+                bullet.Health--;
+            }
                      
-            //Destruimos el proyectil
-            Destroy(collision.gameObject); 
+            
 
         }
 
