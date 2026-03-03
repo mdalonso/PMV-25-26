@@ -7,6 +7,10 @@ public class Bullet : MonoBehaviour
     //_speed es un campo privado quue está serializado para que aparezca en el inspector
     [SerializeField] float _speed = 5;
 
+    //Campos que gestionan el powerup "proyectil potente"
+    bool _powerShot = false;//Por defecto es un proyectil normal
+    [SerializeField] int _health = 3;//ESte indica el número de enemigos que puede matar antes de desaparecer
+
 
     public float Speed
     {
@@ -14,12 +18,34 @@ public class Bullet : MonoBehaviour
         set { _speed = value; }
     }
 
-   
+    public int Health { 
+        get => _health;
+        set {
+            _health = value;
+            if (_powerShot && _health<=0)
+            {
+                PoolManager.Instance.ReturnToPool(this.GetComponent<ObjectPoolBehaviour>());
+            }
+        }
+    }
+    public bool PowerShot { get => _powerShot; set => _powerShot = value; }
+
     private void Start()
     {
+        //Si disparamos instanciando un proyectil directamente tenemos que destruir desde aquí el proyectil transcurridos unos
+        //segundos. Si lo hacemos con un pool, esto se gestiona en el script PlayerShooting
         //Para que los proyectiles no existan eternamete en el caso de que no hagan blanco
         //los destruiremos a los 5 segundos en caso de que no hayan acertado a ningún enemigo.
-        Destroy(gameObject, 5);
+        //Destroy(gameObject, 5);
+
+    }
+    //Cuando activamos un proyectil (al sacarlo del pool) hay que restablecer sus valores por defecto
+    //Para que actue como si acabáramos de instanciarlo.
+    private void OnEnable()
+    {
+        Debug.Log("Activando proyectil");
+        _powerShot = false;
+        _health = 3;
     }
     // Update is called once per frame
     void Update()
