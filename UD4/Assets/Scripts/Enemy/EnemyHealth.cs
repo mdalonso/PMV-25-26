@@ -4,6 +4,7 @@ public class EnemyHealth : MonoBehaviour
 {
 
     [SerializeField, Tooltip("Vida del enemigo")] int _health = 1; //vida
+    [SerializeField] GameStats _gameStats;
 
     public int Health { get => _health; set => _health = value; }
 
@@ -27,5 +28,9 @@ public class EnemyHealth : MonoBehaviour
         //Destroy(gameObject);
         
         PoolManager.Instance.ReturnToPool(gameObject.GetComponent<ObjectPoolBehaviour>());
+
+        //Sumamos los puntos al score
+        _gameStats.Score += _gameStats.ScorePoints;
+        
     }
 }
