@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] int _speed = 3;//velocidad del movimiento
     Transform _player;//Almacenará la posición del player
+    Rigidbody2D rb;//REferencia al rigid body para aplicar el movimiento a través del sistema de física
 
-
+    private void Awake()
+    {
+        rb=GetComponent<Rigidbody2D>();//Inicialización de referencia
+    }
     void Start()
     {
         //Para hacer que el enemigo se dirija hacia el player de forma automatizada
@@ -44,10 +49,14 @@ public class EnemyMovement : MonoBehaviour
             //Obtenemos el vector de dirección (destino - origen, si no se moverá en dirección contraria)
             Vector2 direction = _player.position - transform.position;
 
+            //Aplicamos movimiento al enemigo a traves del sistema de física
+            Vector2 newPos = rb.position + direction.normalized * _speed * Time.fixedDeltaTime;
+            rb.MovePosition(newPos);
+
             //Aplicamos el vector de dirección a la posición del Enemy
             //Hay que hacer Casting porque el vector de dirección se ha definido como un Vector2 y necesitamos
             //un Vector3
-            transform.position += (Vector3)direction.normalized * Time.deltaTime * _speed;
+            //transform.position += (Vector3)direction.normalized * Time.deltaTime * _speed;
         }
 
 
