@@ -5,15 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newGameStats", menuName = "Scriptable Objects/GameStats")]
 public class GameStats : ScriptableObject
 {
-    [SerializeField] int _initialTime = 5;
-    [SerializeField] int _initialScore = 0;
-    //[Range(1, 10)] public int difficulty = 1;
-
+    [SerializeField] int _initialTime = 30;
+    [SerializeField] int _initialScore = 0;//Inicialización de los puntos acumulados por el jugador
+    [SerializeField][Range(1, 10)]  int _difficulty = 1;
+    
 
     [SerializeField] int _time = 30;
 
     [SerializeField] int _score = 0;//Acumula los puntos del player
-    //[SerializeField] int _scorePoints = 100;
+    [SerializeField] int _scorePoints = 100;//Puntos que se acumularán cada vez que un enemigo muera
 
     public int Score
     {
@@ -32,6 +32,8 @@ public class GameStats : ScriptableObject
             _time = value;
         }
     }
+    public int Difficulty { get => _difficulty; }
+    public int ScorePoints { get => _scorePoints; }
 
     public void ResetState()
     {
