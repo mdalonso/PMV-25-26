@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text scoreText;//Referencia al elemento del HUD que muestra la puntuación actual
     [SerializeField] TMP_Text timeText;//Referencia al elemento del HUD que muestra el tiempo restante
     [SerializeField] TMP_Text finalScoreText;//REferencia al elemento de la pantalla de GameOver que muestra la puntuación final
+    [SerializeField] GameObject gameOverScreen;
 
     [SerializeField] GameStats gameStats;
 
@@ -24,9 +25,24 @@ public class UIManager : MonoBehaviour
         }
     }
     //Método para actualizar la puntuación en el HUD
-    public void UpdateUIScore(int newScore)
+    public void UpdateUIScore()
     {
-        scoreText.text=newScore.ToString();
+        scoreText.text=gameStats.Score.ToString();
+    }
+
+    public void UpdateUITime()
+    {
+        timeText.text=gameStats.Time.ToString();
+    }
+
+    public void UpdateUIHealth(int value)
+    {
+        healthText.text=value.ToString();
+    }
+
+    public void ShowGameOverScreen()
+    {
+        gameOverScreen.SetActive(true);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

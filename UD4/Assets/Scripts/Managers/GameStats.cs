@@ -21,6 +21,7 @@ public class GameStats : ScriptableObject
         set
         {
             _score = value;
+            UIManager.Instance.UpdateUIScore();
         }
     }
     //public int ScorePoints { get => _scorePoints; set => _scorePoints = value; }
@@ -30,6 +31,7 @@ public class GameStats : ScriptableObject
         set
         {
             _time = value;
+            UIManager.Instance.UpdateUITime();
         }
     }
     public int Difficulty { get => _difficulty; }

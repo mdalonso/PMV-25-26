@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class GameManagerSO : MonoBehaviour
 {
     [SerializeField] GameStats gameStats;
+        
+    
 
     // Start is called before the first frame update
     void Start()
     {
         gameStats.ResetState();
 
+        
         StartCoroutine(CountDownRoutine());
 
         
@@ -28,7 +32,9 @@ public class GameManagerSO : MonoBehaviour
         }
 
         Debug.Log("Game over");
-        ExitGame();//Reto 4 (el juego termina al terminar la cuenta atrás)
+
+        
+        //ExitGame();//Reto 4 (el juego termina al terminar la cuenta atrás)
 
     }
 
@@ -41,6 +47,13 @@ public class GameManagerSO : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("SampleScene");
+        gameStats.ResetState();
+    }
+    
 
 
 }
