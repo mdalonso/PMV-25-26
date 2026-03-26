@@ -8,12 +8,12 @@ public class Water : MonoBehaviour
     [SerializeField] float _speedPenalty = 0.5f;
 
     // Start is called before the first frame update
-    public float SpeedPenalty { get { return _speedPenalty; } set { _speedPenalty = value; } }
+    public float SpeedPenalty { get { return _speedPenalty; } }
 
     
 
     /***
-     * Ejemplo de comunicación mediane eventos. **/
+     * Ejemplo de comunicación mediante eventos. **/
     //Definimos dos eventos que se dispararán bajo determinadas circunstancias
     //El método de respuesta a este evento requiere de un parámetro float (penalización sobre la velocidad del player)
     public event Action<float> OnWater;//Se disparará cuando el player entre en el agua
