@@ -7,7 +7,9 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] int _speed = 3;//velocidad del movimiento
     Transform _player;//Almacenará la posición del player
-    Rigidbody2D rb;//REferencia al rigid body para aplicar el movimiento a través del sistema de física
+    Rigidbody2D rb;//Referencia al rigid body para aplicar el movimiento a través del sistema de física
+
+    //[SerializeField] Animator anim;//REferencia al objeto que contiene en Animator (El objeto que contiene el renderer visible). Se inicializa en el inspector
 
     private void Awake()
     {
@@ -39,6 +41,11 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         //movimiento automático del Enemy hacia el Player.
+        //MoveToPlayer();
+    }
+
+    private void FixedUpdate()
+    {
         MoveToPlayer();
     }
 
@@ -49,16 +56,26 @@ public class EnemyMovement : MonoBehaviour
             //Obtenemos el vector de dirección (destino - origen, si no se moverá en dirección contraria)
             Vector2 direction = _player.position - transform.position;
 
-            //Aplicamos movimiento al enemigo a traves del sistema de física
-            Vector2 newPos = rb.position + direction.normalized * _speed * Time.fixedDeltaTime;
-            rb.MovePosition(newPos);
-
-            //Aplicamos el vector de dirección a la posición del Enemy
+            //Aplicamos el vector de dirección a la posición del Enemy (Va al Update)
             //Hay que hacer Casting porque el vector de dirección se ha definido como un Vector2 y necesitamos
             //un Vector3
             //transform.position += (Vector3)direction.normalized * Time.deltaTime * _speed;
+
+            //Aplicamos movimiento al enemigo a traves del sistema de física (Va a FixedUpdate)
+            Vector2 newPos = rb.position + direction.normalized * _speed * Time.fixedDeltaTime;
+            rb.MovePosition(newPos);
+
+            //Gestión de la transición entre animaciones a través del parámetro speed
+            //anim.SetFloat("Speed", direction.magnitude);
+            
+
         }
 
+
+    }
+
+    void Flipping()
+    {
 
     }
 
