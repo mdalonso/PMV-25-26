@@ -25,11 +25,11 @@ public static class EnemyFactory
     {
         if (enemy.Type == PoolObjectType.BasicEnemy)
         {
-            enemy.gameObject.GetComponent<EnemyHealth>().Health = _basicHealth;
+            enemy.GetComponent<EnemyHealth>().Health = _basicHealth;
         }
         else
         {
-            enemy.gameObject.GetComponent<EnemyHealth>().Health = _strongHealth;
+            enemy.GetComponent<EnemyHealth>().Health = _strongHealth;
         }
     }
 }

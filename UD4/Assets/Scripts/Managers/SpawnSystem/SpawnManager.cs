@@ -28,14 +28,16 @@ public class SpawnManager : MonoBehaviour
     //...Para generar una posición aleatoria dentro de un rectángulo...
     //...necesitamos una referencia al tilemap ya que necesitamos conocer sus límites
     [SerializeField] Tilemap _tilemap;//Se inicializa desde el inspector
+    //Límites del Tilemap
     Vector2 min;//Almacenará las coordenadas de la esquina inferior izquierda del tilemap (límite inferior)
     Vector2 max;//Almacenará las coordenadas de la esquina superior derecha del tile map (límite superior)
+
 
     private void Start()
     {
         
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");//inicialización de las referencias a los spawnpoints
-        
+
         TileLimits();
         
         //Lanzamiento de las corrutinas de spawn
@@ -94,6 +96,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //Cálculo de los límites del Tilemap que se mantienen durante todo el juego.
     void TileLimits()
     {
         //Cálcular los límites exactos del tilemap para generar una posición aleatoria dentro del mismo
@@ -105,6 +108,8 @@ public class SpawnManager : MonoBehaviour
         max = _tilemap.CellToWorld(bounds.max);
         Debug.Log($"Coordenadas {min} {max}");
     }
+
+
 
 }
 
