@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;//Para el movimiento utilizando Rigid Body (física)
 
     GameObject[] _water;
+    [SerializeField] Animator anim;
 
     private void Awake()
     {
@@ -86,9 +87,12 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 newPos=(Vector2)rb.position+ (Vector2)moveDirection.normalized*_speed*Time.fixedDeltaTime;
         rb.MovePosition(newPos);
+        //Actualizamos el parámetro de la animación Idle->Run->Idle para que transicione
+        //cuando el player se mueva
+        anim.SetFloat("Speed", moveDirection.magnitude);
         //rb.linearVelocity=moveDirection.normalized*_speed;
 
-
+      
 
     }
 

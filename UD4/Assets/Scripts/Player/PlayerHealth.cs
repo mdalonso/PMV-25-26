@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
         set
         {
             _health = value;
+            UIManager.Instance.UpdateUIHealth(_health);
             if (_health <= 0)
             {
                 _health = 0;
@@ -26,7 +27,8 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Game Over");
-        _gameManager.ExitGame();//Reto 4 
+        //_gameManager.ExitGame();//Reto 4 
+        UIManager.Instance.ShowGameOverScreen();
         //ExitGame();//Reto 3
     }
 //Implementación de método para terminar la ejecución del juego en caso de que el player muera
