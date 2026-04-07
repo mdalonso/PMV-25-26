@@ -14,8 +14,6 @@ public class GameManagerSO : MonoBehaviour
     void Start()
     {
         gameStats.ResetState();
-
-        
         StartCoroutine(CountDownRoutine());
 
         
@@ -50,8 +48,8 @@ public class GameManagerSO : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene("SampleScene");
-        gameStats.ResetState();
+        SceneManager.LoadScene("SampleScene");//volvemos a cargar la escena
+        gameStats.ResetState();//Reseteamos los valores
     }
     
 
