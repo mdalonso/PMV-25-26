@@ -7,6 +7,9 @@ using UnityEngine.Tilemaps;
 public class GameManagerSO : MonoBehaviour
 {
     [SerializeField] GameStats gameStats;
+
+    [SerializeField] AudioClip gameOverClip;
+    [SerializeField] AudioSource cameraSound;
         
     
 
@@ -31,7 +34,13 @@ public class GameManagerSO : MonoBehaviour
 
         Debug.Log("Game over");
 
-        
+        cameraSound.Pause();
+        AudioSource.PlayClipAtPoint(gameOverClip, Vector2.zero,1f);
+        UIManager.Instance.ShowGameOverScreen();
+
+
+
+
         //ExitGame();//Reto 4 (el juego termina al terminar la cuenta atrás)
 
     }
@@ -50,6 +59,7 @@ public class GameManagerSO : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");//volvemos a cargar la escena
         gameStats.ResetState();//Reseteamos los valores
+        cameraSound.UnPause();//Vuelve a sonar la música ambiental
     }
     
 

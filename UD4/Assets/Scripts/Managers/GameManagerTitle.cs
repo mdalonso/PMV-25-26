@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManagerTitle : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] AudioClip buttonClip;
+    
 
     // Update is called once per frame
     void Update()
@@ -17,7 +15,13 @@ public class GameManagerTitle : MonoBehaviour
 
     public void PlayGame()
     {
+        AudioSource.PlayClipAtPoint(buttonClip, Vector2.zero);
         Debug.Log("Empezamos el juego");
+        Invoke("LoadGame", 1f);
+    }
+
+    void LoadGame()
+    {
         SceneManager.LoadScene("SampleScene");
     }
 }
